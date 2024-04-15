@@ -44,6 +44,8 @@ type ProviderData struct {
 
 	// Common OIDC options for any OIDC-based providers to consume
 	AllowUnverifiedEmail     bool
+	ObjectIDClaim            string
+	NameClaim                string
 	UserClaim                string
 	EmailClaim               string
 	GroupsClaim              string
@@ -258,6 +260,8 @@ func (p *ProviderData) buildSessionFromClaims(rawIDToken, accessToken string) (*
 		{p.UserClaim, &ss.User},
 		{p.EmailClaim, &ss.Email},
 		{p.GroupsClaim, &ss.Groups},
+		{p.ObjectIDClaim, &ss.ObjectID},
+		{p.NameClaim, &ss.Name},
 		// TODO (@NickMeves) Deprecate for dynamic claim to session mapping
 		{"preferred_username", &ss.PreferredUsername},
 	} {

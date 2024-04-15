@@ -233,7 +233,9 @@ type OIDCOptions struct {
 	GroupsClaim string `json:"groupsClaim,omitempty"`
 	// UserIDClaim indicates which claim contains the user ID
 	// default set to 'email'
-	UserIDClaim string `json:"userIDClaim,omitempty"`
+	UserIDClaim  string `json:"userIDClaim,omitempty"`
+	NameClaim    string `json:"nameClaim,omitempty"`
+	ObjecIDClaim string `json:"objectIDClaim,omitempty"`
 	// AudienceClaim allows to define any claim that is verified against the client id
 	// By default `aud` claim is used for verification.
 	AudienceClaims []string `json:"audienceClaims,omitempty"`

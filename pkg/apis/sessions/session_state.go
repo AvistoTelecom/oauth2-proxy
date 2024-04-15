@@ -24,6 +24,8 @@ type SessionState struct {
 
 	Nonce []byte `msgpack:"n,omitempty"`
 
+	ObjectID          string   `msgpack:"id,omitempty"`
+	Name              string   `msgpack:"name,omitempty"`
 	Email             string   `msgpack:"e,omitempty"`
 	User              string   `msgpack:"u,omitempty"`
 	Groups            []string `msgpack:"g,omitempty"`
@@ -101,7 +103,7 @@ func (s *SessionState) Age() time.Duration {
 
 // String constructs a summary of the session state
 func (s *SessionState) String() string {
-	o := fmt.Sprintf("Session{email:%s user:%s PreferredUsername:%s", s.Email, s.User, s.PreferredUsername)
+	o := fmt.Sprintf("Session{email:%s user:%s PreferredUsername:%s oid:%s name:%s", s.Email, s.User, s.PreferredUsername, s.ObjectID, s.Name)
 	if s.AccessToken != "" {
 		o += " token:true"
 	}
@@ -128,6 +130,10 @@ func (s *SessionState) GetClaim(claim string) []string {
 		return []string{}
 	}
 	switch claim {
+	case "name":
+		return []string{s.Name}
+	case "oid":
+		return []string{s.ObjectID}
 	case "access_token":
 		return []string{s.AccessToken}
 	case "id_token":
