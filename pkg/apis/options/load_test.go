@@ -7,8 +7,7 @@ import (
 	"time"
 
 	. "github.com/oauth2-proxy/oauth2-proxy/v7/pkg/apis/options/testutil"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/ginkgo/extensions/table"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/spf13/pflag"
 )
@@ -48,16 +47,17 @@ var _ = Describe("Load", func() {
 		},
 
 		Options: Options{
-			ProxyPrefix:        "/oauth2",
-			PingPath:           "/ping",
-			ReadyPath:          "/ready",
-			RealClientIPHeader: "X-Real-IP",
-			ForceHTTPS:         false,
-			Cookie:             cookieDefaults(),
-			Session:            sessionOptionsDefaults(),
-			Templates:          templatesDefaults(),
-			SkipAuthPreflight:  false,
-			Logging:            loggingDefaults(),
+			BearerTokenLoginFallback: true,
+			ProxyPrefix:              "/oauth2",
+			PingPath:                 "/ping",
+			ReadyPath:                "/ready",
+			RealClientIPHeader:       "X-Real-IP",
+			ForceHTTPS:               false,
+			Cookie:                   cookieDefaults(),
+			Session:                  sessionOptionsDefaults(),
+			Templates:                templatesDefaults(),
+			SkipAuthPreflight:        false,
+			Logging:                  loggingDefaults(),
 		},
 	}
 
